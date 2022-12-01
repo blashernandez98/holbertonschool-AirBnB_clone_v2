@@ -10,9 +10,10 @@ app = Flask(__name__)
 def home():
     """ Home route """
     from models.state import State
+    state_list = storage.all(State).values().sort()
     return render_template(
         '7-states_list.html',
-        states=storage.all(State).values())
+        states=state_list)
 
 
 @app.teardown_appcontext
