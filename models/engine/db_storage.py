@@ -66,12 +66,6 @@ class DBStorage:
 
     def reload(self):
         """ Reloads """
-        from models.user import User
-        from models.state import State
-        from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
         Base.metadata.create_all(self.__engine)
         factory = sessionmaker(
             bind=self.__engine,
@@ -81,6 +75,4 @@ class DBStorage:
 
     def close(self):
         """ Closes current session """
-        print("debugging")
-        self.__scoped.remove()
-        self.reload()
+        self.__session.close()
