@@ -14,10 +14,10 @@ import os
 
 
 classes = {
-        'User': User, 'Place': Place,
-        'Amenity': Amenity, 'State': State,
-        'City': City, 'Review': Review
-        }
+    'User': User, 'Place': Place,
+    'Amenity': Amenity, 'State': State,
+    'City': City, 'Review': Review
+}
 
 
 class DBStorage:
@@ -34,7 +34,8 @@ class DBStorage:
         mode = os.getenv('HBNB_ENV')
 
         self.__engine = create_engine(
-            f"mysql+mysqldb://{user}:{password}@{host}/{database}",
+            "mysql+mysqldb://{}:{}@{}/{}".format(
+                user, password, host, database),
             pool_pre_ping=True)
 
         if mode == 'test':
@@ -46,11 +47,11 @@ class DBStorage:
 
         if cls:
             for row in self.__session.query(cls).all():
-                obj_dic[f"{type(row).__name__}.{row.id}"] = row
+                obj_dic["{}.{}".format(type(row).__name__, row.id)] = row
         else:
             for model in classes.values():
                 for row in self.__session.query(model):
-                    obj_dic[f"{type(row).__name__}.{row.id}"] = row
+                    obj_dic["{}.{}".format(type(row).__name__, row.id)] = row
         return obj_dic
 
     def new(self, obj):
