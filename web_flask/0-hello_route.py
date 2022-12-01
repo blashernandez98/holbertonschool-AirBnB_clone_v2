@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""" Task 0 module """
+""" Task 0 module """
 from flask import Flask
 
 app = Flask(__name__)
