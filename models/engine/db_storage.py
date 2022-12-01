@@ -75,5 +75,6 @@ class DBStorage:
 
     def close(self):
         """ Closes current session """
+        print("debugging")
         self.__scoped.remove()
         self.reload()
