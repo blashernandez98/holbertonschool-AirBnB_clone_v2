@@ -10,7 +10,8 @@ app = Flask(__name__)
 def home():
     """ Home route """
     from models.state import State
-    state_list = storage.all(State).values().sort()
+    state_list = storage.all(State).values()
+    state_list.sort(key=lambda x: x.name)
     return render_template(
         '7-states_list.html',
         states=state_list)
