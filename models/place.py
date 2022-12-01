@@ -37,7 +37,7 @@ class Place(BaseModel, Base):
             'Review', cascade='all, delete', backref='place')
         amenities = relationship(
             'Amenity', secondary='place_amenity',
-            viewonly=False, overlaps="place_amenities")
+            viewonly=False)
     else:
         @property
         def reviews(self):
@@ -46,6 +46,7 @@ class Place(BaseModel, Base):
             for review in storage.all(Review).values():
                 if review.place_id == self.id:
                     list_rev.append(review)
+            return list_rev
 
         @property
         def amenities(self):
