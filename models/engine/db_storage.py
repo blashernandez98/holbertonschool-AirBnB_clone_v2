@@ -74,6 +74,4 @@ class DBStorage:
 
     def close(self):
         """ Closes current session """
-        if self.__session:
-            self.__session.close()
-        self.__session = self.__scoped()
+        self.__session.close()
