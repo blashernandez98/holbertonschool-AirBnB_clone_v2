@@ -70,8 +70,7 @@ class DBStorage:
         factory = sessionmaker(
             bind=self.__engine,
             expire_on_commit=False)
-        self.__scoped = scoped_session(factory)
-        self.__session = self.__scoped()
+        self.__session = scoped_session(factory)
 
     def close(self):
         """ Closes current session """
