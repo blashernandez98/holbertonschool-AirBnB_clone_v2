@@ -2,6 +2,7 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 from os import getenv
 
 
@@ -20,3 +21,5 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     list_city.append(city)
             return list_city
+    else:
+        cities = relationship("City", backref="state", cascade="delete")
